@@ -2,7 +2,7 @@
 
 1) Download Repo, zip or clone
 
-2) Copy this in httpd.conf of apache
+2) Copy this in httpd.conf of apache (Use the raw editor to copy this, otherwise it won't work)
 -------
 <Directory "C:/webapps/sites/internship/html">
 	Allow from all
