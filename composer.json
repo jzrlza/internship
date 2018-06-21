@@ -1,0 +1,23 @@
+{
+    "name": "internship",
+    "require": {
+        "slim/slim": "3.*",
+        "monolog/monolog": "^1.17",
+        "facebook/php-sdk-v4": "^5.0",
+        "zf1/zend-db":"^1.12",
+        "zf1/zend-cache":"^1.12",
+        "zf1/zend-acl":"^1.12",
+        "zf1/zend-barcode":"^1.12",
+        "zf1/zend-mail":"^1.12",
+        "phpexcel/phpexcel": "dev-master",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plugin\\": "src/Plugin"
+        }
+    },
+    "config": {
+        "preferred-install": "vendor"
+    }
+}
