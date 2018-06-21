@@ -9,7 +9,6 @@
         "zf1/zend-acl":"^1.12",
         "zf1/zend-barcode":"^1.12",
         "zf1/zend-mail":"^1.12",
-        "phpexcel/phpexcel": "dev-master",
         "guzzlehttp/guzzle": "^6.0"
     },
     "autoload": {
