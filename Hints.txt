@@ -1,0 +1,21 @@
+Use Model, View, Controller
+
+Login Page
+
+Models :
+User
+
+Views :
+Login Page
+Home Page with username displayed and logout button
+
+Controllers:
+Login Controller
+
+
+https://scotch.io/tutorials/getting-started-with-slim-3-a-php-microframework
+
+
+Database
+
+http://php.net/manual/en/mysqli-result.fetch-array.php
