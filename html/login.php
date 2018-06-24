@@ -4,7 +4,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 
-// Create connection, be careful of variable name conflicts!!
+// Create connection, be careful of variable name conflicts!! This is for D.I.Y principle
 function connect_db(){
   $db_servername = "localhost";
   $db_user_name = "root";
@@ -20,6 +20,19 @@ function connect_db(){
   return $conn;
 }
 
+//Authenticate
+function authenticate($conn, $response, $user_name, $password){
+  $sql = "SELECT * FROM users WHERE user_name = '$user_name' AND password = '$password'";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows === 0) {
+    $response->getBody()->write("Invalid Username or Password, Try again");
+  } else {
+    $row = $result->fetch_assoc();
+    $response->getBody()->write("Hello, ". $row["user_name"]);
+  }
+}
+
 $app = new \Slim\App;
 
 //http://localhost/internship/html/login.php/hello/12345
@@ -32,11 +45,14 @@ $app->get('/{user_name}/{password}', function (Request $request, Response $respo
 {
   $user_name = $args['user_name'];
   $password = $args['password'];
-  if ($user_name === 'hello' && $password === '12345')
-  { //has in database
-    $response->getBody()->write("Hello, $user_name.");
-    return $response;
-  }
+  
+  $conn = connect_db();
+ 
+  authenticate($conn, $response, $user_name, $password);
+
+  $conn->close();
+
+  return $response;
 });
 
 $app->post('/register', function (Request $request, Response $response, array $args)
@@ -58,12 +74,7 @@ $app->post('/', function (Request $request, Response $response, array $args)
   $sql = "SELECT * FROM users WHERE user_name = '$user_name' AND password = '$password'";
   $result = $conn->query($sql);
 
-  if ($result->num_rows === 0) {
-    $response->getBody()->write("Invalid Username or Password, Try again");
-  } else {
-    $row = $result->fetch_assoc();
-    $response->getBody()->write("Hello, ". $row["user_name"]);
-  }
+  authenticate($conn, $response, $user_name, $password);
 
   /*
   List all users code
