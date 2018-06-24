@@ -70,9 +70,6 @@ $app->post('/', function (Request $request, Response $response, array $args)
 
   // Create connection, be careful of variable name conflicts!!
   $conn = connect_db();
- 
-  $sql = "SELECT * FROM users WHERE user_name = '$user_name' AND password = '$password'";
-  $result = $conn->query($sql);
 
   authenticate($conn, $response, $user_name, $password);
 
