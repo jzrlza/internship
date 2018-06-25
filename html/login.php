@@ -63,7 +63,7 @@ $app->post('/register', function (Request $request, Response $response, array $a
   return $response;
 });
 
-$app->post('/', function (Request $request, Response $response, array $args)
+$app->post('/login', function (Request $request, Response $response, array $args)
 {
   $user_name = $request->getParsedBody()['user_name'];
   $password = $request->getParsedBody()['password'];
@@ -87,6 +87,15 @@ $app->post('/', function (Request $request, Response $response, array $args)
   */
 
   $conn->close();
+
+  return $response;
+  
+});
+
+$app->post('/loginFB', function (Request $request, Response $response, array $args)
+{
+  $user_name = $request->getParsedBody()['user_name'];
+  $password = $request->getParsedBody()['password'];
 
   return $response;
   
