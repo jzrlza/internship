@@ -1,0 +1,213 @@
+<?php
+$session = new \SlimSession\Helper;
+?>
+
+<html>
+  <head>
+    <title>WebIntern - Sign up to move on.</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" type="text/css" href="//localhost/internship/front-pages.css">
+  </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <div class="main">
+      <h3 class="header">Sign in to move on.</h3>
+
+      <form class="form" id="login-form">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="user_name" name="user_name" required>
+          <label class="mdl-textfield__label" for="user_name">Username (Your unique identity)</label>
+        </div>
+
+        <br><br>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="password" id="password" name="password" required>
+          <label class="mdl-textfield__label" for="password">Password (Your security key)</label>
+        </div>
+      
+        <br><br>
+
+      </form>
+
+      <a id="dialog"></a>
+
+      <button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Sign in
+      </button>
+      <br>
+      <br>
+      <button id="regis-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Sign up (Join us)
+      </button>
+
+      <br><br>
+
+      <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true" action="statusChangeCallback(response)"></div>
+
+    </div>
+    
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//localhost/internship/error.js"></script>
+    <script>
+        var fb_profile = {
+          id: '',
+          name: '',
+          img_src: ''
+        }
+        
+        function statusChangeCallback(response) {
+          console.log(window.location);
+          console.log(response);
+
+          if (response.status === "connected") {
+            // Logged into your app and Facebook.
+            runAPI();
+          } else {
+            // The person is not logged into your app or we are unable to tell.
+          }
+        }
+
+        function record_fb_name(response) {
+          fb_profile.id = response.id;
+          fb_profile.name = response.name;
+          console.log(fb_profile.name);
+        }
+
+        function record_fb_img(response) {
+          fb_profile.img_src = response.data.url;
+          console.log(fb_profile.img_src);
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
+        }
+      
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : "400378810456321",
+            cookie     : true,  // enable cookies to allow the server to access the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : "v3.0" // use graph api version 2.8
+          });
+
+          FB.Event.subscribe('auth.login', function() {
+            FB.getLoginStatus(function(response) {
+              statusChangeCallback(response);
+            });
+          });
+
+          FB.Event.subscribe('auth.authResponseChange', function() {
+            FB.getLoginStatus(function(response) {
+              statusChangeCallback(response);
+            });
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=400378810456321&autoLogAppEvents=1";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "facebook-jssdk"));
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function runAPI() {
+          console.log("Welcome");
+          FB.api('/me', function(response) {
+            record_fb_name(response);
+            FB.api('me/picture?redirect=false', function(response) {
+              record_fb_img(response);
+              redirect(); //Must be in-most for 0% chance of profile load error
+            });
+          });   
+        }
+
+        function redirect() {
+          post('//localhost/internship/login.php/login/facebook',
+            {
+              fb_user_id: fb_profile.id,
+              fb_user_name: fb_profile.name,
+              fb_user_img_src: fb_profile.img_src
+            }
+          , 'post');
+        }
+
+        function post(path, params, method) {
+          method = method || "post"; // Set method to post by default if not specified.
+
+          // The rest of this code assumes you are not using a library.
+          // It can be made less wordy if you use one.
+          var form = document.createElement("form");
+          form.setAttribute("method", method);
+          form.setAttribute("action", path);
+
+          for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+              var hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("id", key);
+              hiddenField.setAttribute("name", key);
+              hiddenField.setAttribute("value", params[key]);
+
+              form.appendChild(hiddenField);
+            }
+          }
+
+          document.body.appendChild(form);
+          form.submit();
+        }
+
+        $(document).ready(function() {
+          $('#login-button').prop('disabled', true);
+
+          $("#login-button").click(function() {
+            $('#login-form').trigger('submit');
+          });
+
+          $('#login-form').find('input').each(function() {
+            $(this).keyup(function() {
+              if ($('#user_name').val() === "" || $('#password').val() === "") {
+                $('#login-button').prop('disabled', true);
+              } else {
+                $('#login-button').prop('disabled', false);
+              }
+            });
+          });
+
+          $('#login-form').submit(function(evt) {
+            evt.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+            type: 'POST',
+            url: '//localhost/internship/login.php/login/guest',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+              window.location.href = '//localhost/internship/login.php/welcome';
+            },
+            error: onError
+            });
+          });
+
+          $("#regis-button").click(function() {
+            window.location.href = '//localhost/internship/login.php/regis';
+          });
+        });
+      </script>
+  </body>
+</html>

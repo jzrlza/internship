@@ -1,0 +1,15 @@
+.main {
+  display: grid;
+  justify-content: center;
+  padding-top: 75px;
+}
+.header, .fb-login-button, #dialog, .msg, #logout-btn{
+  text-align: center;
+}
+#dialog, #too-large {
+  color: red;
+  padding-top: 10px;
+}
+#the_user_name {
+  font-family: cursive;
+}

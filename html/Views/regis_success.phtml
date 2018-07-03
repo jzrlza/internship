@@ -1,0 +1,34 @@
+<?php
+$session = new \SlimSession\Helper;
+?>
+
+<html>
+  <head>
+    <title>WebIntern - Sign up Success!!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"> 
+    <link rel="stylesheet" type="text/css" href="//localhost/internship/front-pages.css">
+  </head>
+
+  <body>
+    <div class="main">
+      <h3 class="header">Sign up Success!!</h3>
+
+      <h6 class="msg">Thank you for joining us! Let's try to sign in.</h6>
+
+      <button id="back-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        Back to sign in page
+      </button>
+    </div>
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#back-btn").click(function() {
+          window.location.href = '//localhost/internship/login.php';
+        });
+      });
+    </script>
+  </body>
+</html>
