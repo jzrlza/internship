@@ -7,62 +7,124 @@ $session = new \SlimSession\Helper;
     <title>WebIntern - Sign up to move on.</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <link rel="stylesheet" type="text/css" href="//localhost/internship/front-pages.css">
+    <link rel="stylesheet" type="text/css" href="
+    <?php
+      echo '//'.$_SERVER['HTTP_HOST'].'/internship/front-pages.css';
+    ?>
+    ">
   </head>
 
   <body>
     <div id="fb-root"></div>
-    <div class="main">
-      <h3 class="header">Sign in to move on.</h3>
-
-      <form class="form" id="login-form">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="user_name" name="user_name" required>
-          <label class="mdl-textfield__label" for="user_name">Username (Your unique identity)</label>
+    
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">WebIntern</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="
+            <?php
+              echo '//'.$_SERVER['HTTP_HOST'].'/internship/login.php';
+            ?>
+            ">Sign in</a>
+            <a class="mdl-navigation__link" href="
+            <?php
+              echo '//'.$_SERVER['HTTP_HOST'].'/internship/login.php/regis';
+            ?>
+            ">Join us</a>
+          </nav>
         </div>
-
-        <br><br>
-
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="password" id="password" name="password" required>
-          <label class="mdl-textfield__label" for="password">Password (Your security key)</label>
-        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title-drawer">WebIntern</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="
+          <?php
+            echo '//'.$_SERVER['HTTP_HOST'].'/internship/login.php';
+          ?>
+          ">Sign in</a>
+          <a class="mdl-navigation__link" href="
+          <?php
+            echo '//'.$_SERVER['HTTP_HOST'].'/internship/login.php/regis';
+          ?>
+          ">Join us</a>
+        </nav>
+      </div>
       
+      <div class="main">
+        <h3 class="header">Sign in to move on.</h3>
+
+        <form class="form" id="login-form">
+          <i class="material-icons">
+          person
+          </i>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input input_login" type="text" id="user_name" name="user_name">
+            <label class="mdl-textfield__label" for="user_name">Username (Your unique identity)</label>
+          </div>
+
+          <br><br>
+
+          <i class="material-icons">
+          enhanced_encryption
+          </i>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input input_login" type="password" id="password" name="password">
+            <label class="mdl-textfield__label" for="password">Password (Your security key)</label>
+          </div>
+        
+          <br><br>
+
+        </form>
+
+        <a id="dialog"></a>
+
+        <button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Sign in
+        </button>
+        <br>
+        <br>
+        <button id="regis-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          Sign up (Join us)
+        </button>
+
         <br><br>
 
-      </form>
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true" action="statusChangeCallback(response)"></div>
 
-      <a id="dialog"></a>
-
-      <button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        Sign in
-      </button>
-      <br>
-      <br>
-      <button id="regis-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-        Sign up (Join us)
-      </button>
-
-      <br><br>
-
-      <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true" action="statusChangeCallback(response)"></div>
-
+      </div>
+    
     </div>
     
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="//localhost/internship/error.js"></script>
+    <script src="
+    <?php
+      echo '//'.$_SERVER['HTTP_HOST'].'/internship/error.js';
+    ?>
+    "></script>
+    <script src="
+    <?php
+      echo '//'.$_SERVER['HTTP_HOST'].'/internship/size-check.js';
+    ?>
+    "></script>
     <script>
+        if (inComputerSize()) {
+          $("#login-form").children(".mdl-textfield").addClass('mdl-textfield--floating-label');
+        } else {
+          $("#login-form").children(".mdl-textfield").removeClass('mdl-textfield--floating-label');
+        }
+
         var fb_profile = {
           id: '',
           name: '',
           img_src: ''
         }
-        
         function statusChangeCallback(response) {
-          console.log(window.location);
-          console.log(response);
-
           if (response.status === "connected") {
             // Logged into your app and Facebook.
             runAPI();
@@ -70,13 +132,11 @@ $session = new \SlimSession\Helper;
             // The person is not logged into your app or we are unable to tell.
           }
         }
-
         function record_fb_name(response) {
           fb_profile.id = response.id;
           fb_profile.name = response.name;
           console.log(fb_profile.name);
         }
-
         function record_fb_img(response) {
           fb_profile.img_src = response.data.url;
           console.log(fb_profile.img_src);
@@ -134,7 +194,7 @@ $session = new \SlimSession\Helper;
         }
 
         function redirect() {
-          post('//localhost/internship/login.php/login/facebook',
+          post('//'+window.location.hostname+'/internship/login.php/login/facebook',
             {
               fb_user_id: fb_profile.id,
               fb_user_name: fb_profile.name,
@@ -169,20 +229,8 @@ $session = new \SlimSession\Helper;
         }
 
         $(document).ready(function() {
-          $('#login-button').prop('disabled', true);
-
           $("#login-button").click(function() {
             $('#login-form').trigger('submit');
-          });
-
-          $('#login-form').find('input').each(function() {
-            $(this).keyup(function() {
-              if ($('#user_name').val() === "" || $('#password').val() === "") {
-                $('#login-button').prop('disabled', true);
-              } else {
-                $('#login-button').prop('disabled', false);
-              }
-            });
           });
 
           $('#login-form').submit(function(evt) {
@@ -192,20 +240,20 @@ $session = new \SlimSession\Helper;
 
             $.ajax({
             type: 'POST',
-            url: '//localhost/internship/login.php/login/guest',
+            url: '//'+window.location.hostname+'/internship/login.php/login/guest',
             data: formData,
             cache: false,
             contentType: false,
             processData: false,
             success: function(data) {
-              window.location.href = '//localhost/internship/login.php/welcome';
+              window.location.href = '//'+window.location.hostname+'/internship/login.php/welcome';
             },
             error: onError
             });
           });
 
           $("#regis-button").click(function() {
-            window.location.href = '//localhost/internship/login.php/regis';
+            window.location.href = '//'+window.location.hostname+'/internship/login.php/regis';
           });
         });
       </script>

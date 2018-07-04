@@ -1,7 +1,8 @@
 .main {
   display: grid;
   justify-content: center;
-  padding-top: 75px;
+  padding-top: 50px;
+  padding-bottom: 20px;
 }
 .header, .fb-login-button, #dialog, .msg, #logout-btn{
   text-align: center;
@@ -12,4 +13,155 @@
 }
 #the_user_name {
   font-family: cursive;
+}
+.required a{
+  display:inline;
+  float:none;
+  color:red !important;
+  font-weight:bold;
+  margin:0;
+  padding:0;
+}
+.mdl-textfield__input, .mdl-textfield__label {
+  width: 425px;
+}
+.mdl-textfield__error {
+  width: 425px;
+}
+.menu-profile-pic {
+  border-radius: 50%;
+}
+.mdl-layout-title-drawer {
+  font-size: 2em;
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+@media only screen and (max-device-width: 736px) {
+  .header {
+    font-size: 5em;
+    padding-bottom: 70px;
+    width: 900px;
+  }
+  .material-icons, .mdl-textfield__input, .mdl-textfield__label, .upload_label, .fileUpload, #dialog, .msg {
+    font-size: 2.15em;
+  }
+  .mdl-textfield__input, .mdl-textfield__label {
+    width: 900px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+  .mdl-textfield__error {
+    width: 900px;
+    margin-bottom: 60px;
+  }
+  .input_login {
+    margin-bottom: 30px;
+  }
+  .mdl-textfield__error {
+    font-size: 1.5em;
+  }
+  .mdl-button {
+    font-size: 3em;
+    height: 150px;
+    margin-bottom: 40px;
+  }
+  #btn-remove-img {
+    height: 100px;
+  }
+  #dialog, .msg {
+    padding-bottom: 40px;
+  }
+  #ask {
+    font-size: 3em;
+  }
+  #profile_pic {
+    width: 100px;
+    height: 100px;
+  }
+  .fileUpload {
+    width: 600px;
+    padding-top: 10px;
+  }
+  #the_user_name {
+    font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;
+  }
+  .fb-login-button {
+    padding-top: 70px;
+  }
+  .mdl-layout__header {
+    height: 125px;
+  }
+  .mdl-layout-title {
+    padding-top: 40px;
+    padding-left: 30px;
+    font-size: 3.5em;
+  }
+  .mdl-layout__drawer {
+    width: 250px;
+  }
+  .mdl-layout-title-drawer {
+    font-size: 0em;
+  }
+  .mdl-navigation__link {
+    font-size: 3em;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-device-height: 375px) {
+  .main {
+    padding-bottom: 50px;
+  }
+  .header {
+    font-size: 4em;
+    padding-bottom: 40px;
+    width: 925px;
+  }
+  .material-icons, .mdl-textfield__input, .mdl-textfield__label, .upload_label, .fileUpload, #dialog, .msg {
+    font-size: 1.75em;
+  }
+  .mdl-textfield__input, .mdl-textfield__label {
+    width: 925px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+  .mdl-textfield__error {
+    width: 925px;
+    font-size: 1.5em;
+    margin-bottom: 50px;
+  }
+  .input_login {
+    margin-bottom: 30px;
+  }
+  .mdl-button {
+    font-size: 2.75em;
+    height: 125px;
+  }
+  #btn-remove-img {
+    height: 100px;
+  }
+  #dialog, .msg {
+    padding-bottom: 30px;
+  }
+  #ask {
+    font-size: 2.5em;
+  }
+  #profile_pic {
+    width: 75px;
+    height: 75px;
+  }
+  .fileUpload {
+    width: 675px;
+    padding-top: 10px;
+  }
+  #the_user_name {
+    font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif;
+  }
+  .fb-login-button {
+    padding-top: 70px;
+  }
+  .mdl-layout__header {
+    height: 75px;
+  }
 }

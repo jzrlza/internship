@@ -7,47 +7,98 @@ $session = new \SlimSession\Helper;
     <title>WebIntern - Hi <?php echo $session["user_name"]; ?>!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <link rel="stylesheet" type="text/css" href="//localhost/internship/front-pages.css">
+    <link rel="stylesheet" type="text/css" href="
+    <?php
+      echo '//'.$_SERVER['HTTP_HOST'].'/internship/front-pages.css';
+    ?>
+    ">
   </head>
 
   <body>
-    <div class="main">
-        <div id="fb-root"></div>
-          <h3 class="header">Hello, 
-            <b id="the_user_name"> <?php echo $session["user_name"]; ?> </b>!
-          <br><br>
-          <img id="profile_pic" src="
-          <?php 
-            if ($session["user_img"] === null) {
-              echo 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPaSURBVGhD7Vg7SytBFD4mvhXBCAriAwuxt7GxFvM/BC3EWrGxFixFLMTGykIrBRsRLLQWi6ggGgsVEQXfz7nzHfeETe6Qm92d8UbJBx9nMzuzOd/MmTlnt4yIlOaPR8yzPx4lIcWGkpBiw68R4uT4rayspP7+furs7KSKigq6vr6m/f19Ojg48Hq4AYREZk9Pj1paWlL/QjqdVqOjo8ZnRKSxsWDGYjGVSqU8N5V6enpSDw8PzPv7e6Zcw769vXk9lRobGzM+MwwjhVZ3dzcdHh7S5+cnaQFUVobH6Qeqr0dqkWzld+792tpaOjk5oa6uLv4dBaGFdHR00OnpKelZZochRgCHwerqarbv7+/08vKSEQKImLq6Orq5uaFEIsG/wyKuOfV1GQy3t7f0+PjI1+KgCMBMY5Ovr6/T9vY2C2pra6N4PE46tDL9MAGvr6/U0NDAq7uyssLPCQtMTSBOTEzoCVVZsS/7ARgZGTGO0ycX30f/3LGAaUwAGhvzEnh+flZ6RTIUZ1pbW41jhDoclQ6zjAgQ44GZmRnjmAJpbMxLwD+bd3d33DY+Pm7s76cOI+4r4yECVoeYOjs7M44phIE3e19fH+3u7vIm1/5kYr2mpoavCwESZH19PX18fGQdEtj4hT4jF4FLlJaWFrb4UzgDCxHI3IVibW2NDwOcZrLxoyLwijQ3N1MymeTjFKVIeXk5X+/s7NDx8bHXKz+2tra4hNH7jFcVKwobZUUCC7EBOI3QhNMILQjBCl1eXlJ7e7vXKxi+vfrd2NhgCzEQATG4hpDl5WW+FxaZne+ak5OT2mfFpxyIk8t/6pnGBKCx0ToXFhbYWREgRzcIzM3NGccFoLHRKvV7CDsLERDgJ4CMbxoXkMZGK9S1FTsK+FcBVsJpdXXVODYEjY1WCCBjSwjJKkhJMjg4aBwXksbGyNzb21P6VMpyHmLkxUpXxMZxYekkjyAvoPzQzmclOFzLO4ptOMkjw8PDbJEnQKmpIAIfJFzAiRBdyrPFymD28UKFly0kw3Q6zfdsw4kQzLwfksFnZ2e9Fjf4a+NE5eLiIm/oXJj62qKzorG3t5dDDCuB9/uLiws6Ojry7trHf6l+XeDbq19XKAnJh+npaf5+hf0txD4ZGhryerhB1u63QRSEOgnyd2CUJvh0BMzPzxv726CTFUHyw4ogowPII0BTUxNbF3AiBBndbwX4UOEKToTI1xGsBKwQRaQrOBECh1Gm4PMOwgxEYry6uvJ62IeThDgwMECNjY0cSlVVVVw0Qtzm5iadn597veyilNmLDSUhxYaSkGLDLxFC9AeGtwYoe+7kWQAAAABJRU5ErkJggg==';
-            } else {
-              echo $session["user_img"];
-            }
-          ?>
-          " alt="profile picture" width="50" height="50"> </h3>
-        
-        <!-- Hidden, check if FB account or not from session to Javascript -->
-        <div id="is_fb" value="
-        <?php 
-          if ($session["is_FB"]) {
-            echo 'yes';
-          } else {
-            echo 'no';
-          } 
-          ?>">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">WebIntern</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="">Download</a>
+            <a class="mdl-navigation__link" href="">Top Up</a>
+            <a class="mdl-navigation__link" href="">Contact</a>
+            <a class="mdl-navigation__link"><b><?php echo $session["user_name"]; ?></b>    <img class="menu-profile-pic" src="
+            <?php 
+              if ($session["user_img"] === null) {
+                echo 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPaSURBVGhD7Vg7SytBFD4mvhXBCAriAwuxt7GxFvM/BC3EWrGxFixFLMTGykIrBRsRLLQWi6ggGgsVEQXfz7nzHfeETe6Qm92d8UbJBx9nMzuzOd/MmTlnt4yIlOaPR8yzPx4lIcWGkpBiw68R4uT4rayspP7+furs7KSKigq6vr6m/f19Ojg48Hq4AYREZk9Pj1paWlL/QjqdVqOjo8ZnRKSxsWDGYjGVSqU8N5V6enpSDw8PzPv7e6Zcw769vXk9lRobGzM+MwwjhVZ3dzcdHh7S5+cnaQFUVobH6Qeqr0dqkWzld+792tpaOjk5oa6uLv4dBaGFdHR00OnpKelZZochRgCHwerqarbv7+/08vKSEQKImLq6Orq5uaFEIsG/wyKuOfV1GQy3t7f0+PjI1+KgCMBMY5Ovr6/T9vY2C2pra6N4PE46tDL9MAGvr6/U0NDAq7uyssLPCQtMTSBOTEzoCVVZsS/7ARgZGTGO0ycX30f/3LGAaUwAGhvzEnh+flZ6RTIUZ1pbW41jhDoclQ6zjAgQ44GZmRnjmAJpbMxLwD+bd3d33DY+Pm7s76cOI+4r4yECVoeYOjs7M44phIE3e19fH+3u7vIm1/5kYr2mpoavCwESZH19PX18fGQdEtj4hT4jF4FLlJaWFrb4UzgDCxHI3IVibW2NDwOcZrLxoyLwijQ3N1MymeTjFKVIeXk5X+/s7NDx8bHXKz+2tra4hNH7jFcVKwobZUUCC7EBOI3QhNMILQjBCl1eXlJ7e7vXKxi+vfrd2NhgCzEQATG4hpDl5WW+FxaZne+ak5OT2mfFpxyIk8t/6pnGBKCx0ToXFhbYWREgRzcIzM3NGccFoLHRKvV7CDsLERDgJ4CMbxoXkMZGK9S1FTsK+FcBVsJpdXXVODYEjY1WCCBjSwjJKkhJMjg4aBwXksbGyNzb21P6VMpyHmLkxUpXxMZxYekkjyAvoPzQzmclOFzLO4ptOMkjw8PDbJEnQKmpIAIfJFzAiRBdyrPFymD28UKFly0kw3Q6zfdsw4kQzLwfksFnZ2e9Fjf4a+NE5eLiIm/oXJj62qKzorG3t5dDDCuB9/uLiws6Ojry7trHf6l+XeDbq19XKAnJh+npaf5+hf0txD4ZGhryerhB1u63QRSEOgnyd2CUJvh0BMzPzxv726CTFUHyw4ogowPII0BTUxNbF3AiBBndbwX4UOEKToTI1xGsBKwQRaQrOBECh1Gm4PMOwgxEYry6uvJ62IeThDgwMECNjY0cSlVVVVw0Qtzm5iadn597veyilNmLDSUhxYaSkGLDLxFC9AeGtwYoe+7kWQAAAABJRU5ErkJggg==';
+              } else {
+                echo $session["user_img"];
+              }
+            ?>
+            " alt="profile picture" width="50" height="50"></a>
+            <a class="mdl-navigation__link logout-link" href="javascript:void(0);">Logout</a>
+          </nav>
         </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title-drawer">WebIntern</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link"><img class="menu-profile-pic" src="
+            <?php 
+              if ($session["user_img"] === null) {
+                echo 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPaSURBVGhD7Vg7SytBFD4mvhXBCAriAwuxt7GxFvM/BC3EWrGxFixFLMTGykIrBRsRLLQWi6ggGgsVEQXfz7nzHfeETe6Qm92d8UbJBx9nMzuzOd/MmTlnt4yIlOaPR8yzPx4lIcWGkpBiw68R4uT4rayspP7+furs7KSKigq6vr6m/f19Ojg48Hq4AYREZk9Pj1paWlL/QjqdVqOjo8ZnRKSxsWDGYjGVSqU8N5V6enpSDw8PzPv7e6Zcw769vXk9lRobGzM+MwwjhVZ3dzcdHh7S5+cnaQFUVobH6Qeqr0dqkWzld+792tpaOjk5oa6uLv4dBaGFdHR00OnpKelZZochRgCHwerqarbv7+/08vKSEQKImLq6Orq5uaFEIsG/wyKuOfV1GQy3t7f0+PjI1+KgCMBMY5Ovr6/T9vY2C2pra6N4PE46tDL9MAGvr6/U0NDAq7uyssLPCQtMTSBOTEzoCVVZsS/7ARgZGTGO0ycX30f/3LGAaUwAGhvzEnh+flZ6RTIUZ1pbW41jhDoclQ6zjAgQ44GZmRnjmAJpbMxLwD+bd3d33DY+Pm7s76cOI+4r4yECVoeYOjs7M44phIE3e19fH+3u7vIm1/5kYr2mpoavCwESZH19PX18fGQdEtj4hT4jF4FLlJaWFrb4UzgDCxHI3IVibW2NDwOcZrLxoyLwijQ3N1MymeTjFKVIeXk5X+/s7NDx8bHXKz+2tra4hNH7jFcVKwobZUUCC7EBOI3QhNMILQjBCl1eXlJ7e7vXKxi+vfrd2NhgCzEQATG4hpDl5WW+FxaZne+ak5OT2mfFpxyIk8t/6pnGBKCx0ToXFhbYWREgRzcIzM3NGccFoLHRKvV7CDsLERDgJ4CMbxoXkMZGK9S1FTsK+FcBVsJpdXXVODYEjY1WCCBjSwjJKkhJMjg4aBwXksbGyNzb21P6VMpyHmLkxUpXxMZxYekkjyAvoPzQzmclOFzLO4ptOMkjw8PDbJEnQKmpIAIfJFzAiRBdyrPFymD28UKFly0kw3Q6zfdsw4kQzLwfksFnZ2e9Fjf4a+NE5eLiIm/oXJj62qKzorG3t5dDDCuB9/uLiws6Ojry7trHf6l+XeDbq19XKAnJh+npaf5+hf0txD4ZGhryerhB1u63QRSEOgnyd2CUJvh0BMzPzxv726CTFUHyw4ogowPII0BTUxNbF3AiBBndbwX4UOEKToTI1xGsBKwQRaQrOBECh1Gm4PMOwgxEYry6uvJ62IeThDgwMECNjY0cSlVVVVw0Qtzm5iadn597veyilNmLDSUhxYaSkGLDLxFC9AeGtwYoe+7kWQAAAABJRU5ErkJggg==';
+              } else {
+                echo $session["user_img"];
+              }
+            ?>
+            " alt="profile picture" width="50" height="50">      <b><?php echo $session["user_name"]; ?></b></a>
+          <a class="mdl-navigation__link logout-link" href="javascript:void(0);">Logout</a>
+          <hr>
+          <a class="mdl-navigation__link" href="">Download</a>
+          <a class="mdl-navigation__link" href="">Top Up</a>
+          <a class="mdl-navigation__link" href="">Contact</a>
+        </nav>
+      </div>
 
-        <h5 class="header">What would you like to do next?</h5>
+      <div class="main">
+          <div id="fb-root"></div>
+            <h3 class="header">Hello, 
+              <b id="the_user_name"> <?php echo $session["user_name"]; ?> </b>!
+            <br><br>
+            <img id="profile_pic" src="
+            <?php 
+              if ($session["user_img"] === null) {
+                echo 'data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPaSURBVGhD7Vg7SytBFD4mvhXBCAriAwuxt7GxFvM/BC3EWrGxFixFLMTGykIrBRsRLLQWi6ggGgsVEQXfz7nzHfeETe6Qm92d8UbJBx9nMzuzOd/MmTlnt4yIlOaPR8yzPx4lIcWGkpBiw68R4uT4rayspP7+furs7KSKigq6vr6m/f19Ojg48Hq4AYREZk9Pj1paWlL/QjqdVqOjo8ZnRKSxsWDGYjGVSqU8N5V6enpSDw8PzPv7e6Zcw769vXk9lRobGzM+MwwjhVZ3dzcdHh7S5+cnaQFUVobH6Qeqr0dqkWzld+792tpaOjk5oa6uLv4dBaGFdHR00OnpKelZZochRgCHwerqarbv7+/08vKSEQKImLq6Orq5uaFEIsG/wyKuOfV1GQy3t7f0+PjI1+KgCMBMY5Ovr6/T9vY2C2pra6N4PE46tDL9MAGvr6/U0NDAq7uyssLPCQtMTSBOTEzoCVVZsS/7ARgZGTGO0ycX30f/3LGAaUwAGhvzEnh+flZ6RTIUZ1pbW41jhDoclQ6zjAgQ44GZmRnjmAJpbMxLwD+bd3d33DY+Pm7s76cOI+4r4yECVoeYOjs7M44phIE3e19fH+3u7vIm1/5kYr2mpoavCwESZH19PX18fGQdEtj4hT4jF4FLlJaWFrb4UzgDCxHI3IVibW2NDwOcZrLxoyLwijQ3N1MymeTjFKVIeXk5X+/s7NDx8bHXKz+2tra4hNH7jFcVKwobZUUCC7EBOI3QhNMILQjBCl1eXlJ7e7vXKxi+vfrd2NhgCzEQATG4hpDl5WW+FxaZne+ak5OT2mfFpxyIk8t/6pnGBKCx0ToXFhbYWREgRzcIzM3NGccFoLHRKvV7CDsLERDgJ4CMbxoXkMZGK9S1FTsK+FcBVsJpdXXVODYEjY1WCCBjSwjJKkhJMjg4aBwXksbGyNzb21P6VMpyHmLkxUpXxMZxYekkjyAvoPzQzmclOFzLO4ptOMkjw8PDbJEnQKmpIAIfJFzAiRBdyrPFymD28UKFly0kw3Q6zfdsw4kQzLwfksFnZ2e9Fjf4a+NE5eLiIm/oXJj62qKzorG3t5dDDCuB9/uLiws6Ojry7trHf6l+XeDbq19XKAnJh+npaf5+hf0txD4ZGhryerhB1u63QRSEOgnyd2CUJvh0BMzPzxv726CTFUHyw4ogowPII0BTUxNbF3AiBBndbwX4UOEKToTI1xGsBKwQRaQrOBECh1Gm4PMOwgxEYry6uvJ62IeThDgwMECNjY0cSlVVVVw0Qtzm5iadn597veyilNmLDSUhxYaSkGLDLxFC9AeGtwYoe+7kWQAAAABJRU5ErkJggg==';
+              } else {
+                echo $session["user_img"];
+              }
+            ?>
+            " alt="profile picture" width="50" height="50"> </h3>
+          
+          <!-- Hidden, check if FB account or not from session to Javascript -->
+          <div id="is_fb" value="
+          <?php 
+            if ($session["is_FB"]) {
+              echo 'yes';
+            } else {
+              echo 'no';
+            } 
+            ?>">
+          </div>
 
-      <div type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Download games</div>
-      <br>
-      <div type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Top up</div>
-      <br>
-      <div type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Contact us</div>
-      <br>
-      <br>
-      <br>
-      <div type="submit" name="logout-btn" id="logout-btn" value="Logout" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Logout</div>
+          <h5 id="ask" class="header">What would you like to do next?</h5>
+
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Download games</button>
+        <br>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Top up</button>
+        <br>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Contact us</button>
+        <br>
+        <br>
+        <br>
+        <button name="logout-btn" id="logout-btn" value="Logout" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Logout</button>
+      </div>
+
     </div>
 
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
@@ -72,19 +123,27 @@ $session = new \SlimSession\Helper;
 
       $(document).ready(function(){
         $("#logout-btn").click(function() {
-          $.ajax({
-            type: 'POST',
-            url: '//localhost/internship/login.php/logout',
-            data: '',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-              window.location.href = '//localhost/internship/login.php';
-            }
-          });
+          logout();
+        });
+
+        $(".logout-link").click(function() {
+          logout();
         });
       });
+
+      function logout() {
+        $.ajax({
+          type: 'POST',
+          url: '//'+window.location.hostname+'/internship/login.php/logout',
+          data: '',
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) {
+            window.location.href = '//'+window.location.hostname+'/internship/login.php';
+          }
+        });
+      }
     
     </script>
 
