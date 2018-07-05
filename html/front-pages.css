@@ -93,7 +93,7 @@
     height: 125px;
   }
   .mdl-layout-title {
-    padding-top: 40px;
+    padding-top: 60px;
     padding-left: 30px;
     font-size: 3.5em;
   }
@@ -106,6 +106,9 @@
   .mdl-navigation__link {
     font-size: 3em;
     height: 100px;
+  }
+  .user-link {
+    font-size: 2em !important;
   }
 }
 
@@ -163,5 +166,20 @@
   }
   .mdl-layout__header {
     height: 75px;
+  }
+  .mdl-layout-title {
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 3em;
+  }
+  .mdl-navigation__link {
+    font-size: 2em;
+    height: 75px;
+  }
+  .user-link {
+    font-size: 1.5em !important;
+  }
+  .mdl-layout-title-drawer {
+    padding-bottom: 60px;
   }
 }
